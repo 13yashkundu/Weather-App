@@ -7,6 +7,6 @@ interface Api {
     @GET("data/2.5/weather")
     suspend fun getWeather(
         @Query("q") city : String,
-        @Query("appId") apiKey : String
+        @Query("appid") apiKey : String
     )
 }
