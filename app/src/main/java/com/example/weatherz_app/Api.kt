@@ -8,5 +8,5 @@ interface Api {
     suspend fun getWeather(
         @Query("q") city : String,
         @Query("appid") apiKey : String
-    )
+    ): WeatherResponse
 }
