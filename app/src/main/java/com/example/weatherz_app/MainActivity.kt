@@ -1,6 +1,7 @@
 package com.example.weatherz_app
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        vm.fetchWeather("5681555b3ddb46be902105138251911", "New Delhi")
+        val textView = findViewById<TextView>(R.id.response)
+        vm.fetchWeather("5681555b3ddb46be902105138251911", "New Delhi"){response ->
+            textView.text = "City: ${response.name}\nTemp: ${response.main.temp}°C"
+        }
+        }
     }
-}
