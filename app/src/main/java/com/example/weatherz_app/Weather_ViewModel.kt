@@ -12,10 +12,28 @@ class Weather_ViewModel : ViewModel() {
     ) {
         viewModelScope.launch {
             try {
-                val response = Url_setup.api.getWeather( key,city)
+                val response = Url_setup.api.getWeather(key, city)
                 onResult(response)
+            } catch (e: retrofit2.HttpException) {
+                android.util.Log.e(
+                    "WeatherAPI",
+                    "HTTP error: ${e.code()}",
+                    e
+                )
+                onResult(null)
+            } catch (e: java.io.IOException) {
+                android.util.Log.e(
+                    "WeatherAPI",
+                    "Network error",
+                    e
+                )
+                onResult(null)
             } catch (e: Exception) {
-                android.util.Log.e("WeatherAPI", "Failed to load weather", e)
+                android.util.Log.e(
+                    "WeatherAPI",
+                    "Unexpected error",
+                    e
+                )
                 onResult(null)
             }
         }
