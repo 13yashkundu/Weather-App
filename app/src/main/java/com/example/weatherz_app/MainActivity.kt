@@ -1,6 +1,8 @@
 package com.example.weatherz_app
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -20,12 +22,29 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val textView = findViewById<TextView>(R.id.response)
-        vm.fetchWeather("5681555b3ddb46be902105138251911", "New Delhi") { response ->
-            if (response != null) {
-                textView.text = "City: ${response.location.name}\nTemp: ${response.current.temp_c}°C\nWeather: ${response.current.condition.text}"
-            } else {
-                textView.text = "Error fetching weather data!"
+        val retryBtn = findViewById<Button>(R.id.retryButton)
+        fun loadWeather() {
+            vm.fetchWeather(
+                "5681555b3ddb46be902105138251911",
+                "New Delhi",
+                onLoading = { loading ->
+                    if (loading) {
+                        textView.text = "Weather loading..."
+                    }
+                }
+            ) { response ->
+                if (response != null) {
+                    textView.text =
+                        "City: ${response.location.name}\nTemp: ${response.current.temp_c}°C\nWeather: ${response.current.condition.text}"
+                } else {
+                    textView.text = "Error fetching weather data!"
+                    retryBtn.visibility = View.VISIBLE
+                }
             }
+        }
+        loadWeather()
+        retryBtn.setOnClickListener {
+            loadWeather()
         }
     }
 }
