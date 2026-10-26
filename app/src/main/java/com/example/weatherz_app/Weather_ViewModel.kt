@@ -18,7 +18,7 @@ class Weather_ViewModel : ViewModel() {
             onLoading(true)
             try {
                 val response = Url_setup.api.getWeather(key, city)
-                onResult(null)
+                onResult(response)
             } catch (e: retrofit2.HttpException) {
                 android.util.Log.e("WeatherAPI", "HTTP error: ${e.code()}", e)
                 onResult(null)

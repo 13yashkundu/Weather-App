@@ -30,12 +30,14 @@ class MainActivity : AppCompatActivity() {
                 onLoading = { loading ->
                     if (loading) {
                         textView.text = "Weather loading..."
+                        retryBtn.visibility = View.GONE
                     }
                 }
             ) { response ->
                 if (response != null) {
                     textView.text =
                         "City: ${response.location.name}\nTemp: ${response.current.temp_c}°C\nWeather: ${response.current.condition.text}"
+                    retryBtn.visibility = View.GONE
                 } else {
                     textView.text = "Error fetching weather data!"
                     retryBtn.visibility = View.VISIBLE
