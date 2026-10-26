@@ -4,9 +4,13 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface Api {
-    @GET("data/2.5/weather")
+    @GET("v1/forecast.json")
     suspend fun getWeather(
-        @Query("q") city : String,
-        @Query("appid") apiKey : String
+        @Query("key") apiKey: String,
+        @Query("q") city: String,
+        @Query("days") days: Int = 7,
+        @Query("aqi") aqi: String = "no",
+        @Query("alerts") alerts: String = "no"
     ): WeatherResponse
+
 }

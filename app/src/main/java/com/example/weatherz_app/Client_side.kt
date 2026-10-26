@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object Url_setup{
-        private  val baseUrl = "https://api.openweathermap.org/"
+    private val baseUrl = "https://api.weatherapi.com/"
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

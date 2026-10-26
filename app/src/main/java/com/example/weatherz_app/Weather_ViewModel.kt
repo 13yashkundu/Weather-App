@@ -5,10 +5,19 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class Weather_ViewModel : ViewModel() {
-    fun fetchWeather(key: String, city: String, onResult: (WeatherResponse) -> Unit) {
+    fun fetchWeather(
+        key: String,
+        city: String,
+        onResult: (WeatherResponse?) -> Unit
+    ) {
         viewModelScope.launch {
-            val response = Url_setup.api.getWeather(city, key)
-            onResult(response) // Response seedha activity ko bhej do
+            try {
+                val response = Url_setup.api.getWeather( key,city)
+                onResult(response)
+            } catch (e: Exception) {
+                android.util.Log.e("WeatherAPI", "Failed to load weather", e)
+                onResult(null)
+            }
         }
     }
 }

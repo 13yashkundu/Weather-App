@@ -20,8 +20,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val textView = findViewById<TextView>(R.id.response)
-        vm.fetchWeather("5681555b3ddb46be902105138251911", "New Delhi"){response ->
-            textView.text = "City: ${response.name}\nTemp: ${response.main.temp}°C"
-        }
+        vm.fetchWeather("5681555b3ddb46be902105138251911", "New Delhi") { response ->
+            if (response != null) {
+                textView.text = "City: ${response.location.name}\nTemp: ${response.current.temp_c}°C\nWeather: ${response.current.condition.text}"
+            } else {
+                textView.text = "Error fetching weather data!"
+            }
         }
     }
+}
