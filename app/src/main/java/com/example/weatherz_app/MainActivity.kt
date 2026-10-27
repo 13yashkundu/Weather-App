@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val retryBtn = findViewById<Button>(R.id.retryButton)
         fun loadWeather() {
             vm.fetchWeather(
-                "5681555b3ddb46be902105138251911",
+                BuildConfig.API_Key,
                 "New Delhi",
                 onLoading = { loading ->
                     if (loading) {
