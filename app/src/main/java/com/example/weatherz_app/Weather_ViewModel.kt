@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class Weather_ViewModel : ViewModel() {
+class Weather_ViewModel(val repository : Weaather_Repository) : ViewModel() {
     var isLoading = false
         private set
     fun fetchWeather(
@@ -17,7 +17,7 @@ class Weather_ViewModel : ViewModel() {
             isLoading = true
             onLoading(true)
 
-                val response : WeatherResponse? = try { Url_setup.api.getWeather(key, city)
+                val response : WeatherResponse? = try { repository.fetchWeather(key,city)
             } catch (e: retrofit2.HttpException) {
                 android.util.Log.e("WeatherAPI", "HTTP error: ${e.code()}", e)
                 null
