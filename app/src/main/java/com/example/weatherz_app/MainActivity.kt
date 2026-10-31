@@ -11,9 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
-    val vm : Weather_ViewModel by viewModels{
-        WeatherViewModelFactory(Weaather_Repository())
-    }
+    val vm : Weather_ViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

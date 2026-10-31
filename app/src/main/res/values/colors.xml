@@ -2,4 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Top to Bottom Gradient Colors -->
+    <color name="bg_gradient_start">#231342</color>
+    <color name="bg_gradient_center">#561A73</color>
+    <color name="bg_gradient_end">#942A8F</color>
+    <color name="secondry_text">#B8C7D9</color>
+    <color name="primary_text">#FFFFFFFF</color>
+
+    <!-- Temperature Colors -->
+    <color name="temp_main">#FFFFFF</color>
+    <color name="temp_max">#FF9E80</color>
+    <color name="temp_min">#80D8FF</color>
+    <color name="temp_accent_cyan">#70C6FF</color>
 </resources>
