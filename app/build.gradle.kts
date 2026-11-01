@@ -17,6 +17,10 @@ android {
         version = release(37)
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.weatherz_app"
         minSdk = 24
@@ -55,6 +59,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation(libs.androidx.activity.ktx)
+    implementation("androidx.fragment:fragment-ktx:1.8.6")
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)

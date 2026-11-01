@@ -1,26 +1,29 @@
+
+package com.example.weatherz_app
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
+
+class Weather_ViewModel : ViewModel() {
+
+    var isLoading = false
+        private set
+
+    private val repository = Weaather_Repository()
+
+    fun fetchWeather(
+        key: String,
+        city: String
+    ) {
+        viewModelScope.launch {
+            repository.fetchWeather(key, city)
+        }
+    }
+}
 //
-//package com.example.weatherz_app
-//
-//import androidx.lifecycle.ViewModel
-//import androidx.lifecycle.viewModelScope
-//import kotlinx.coroutines.launch
-//import retrofit2.HttpException
-//import java.io.IOException
-//
-//class Weather_ViewModel : ViewModel() {
-//
-//    var isLoading = false
-//        private set
-//
-//    private val repository = Weaather_Repository()
-//
-//    fun fetchWeather(
-//        key: String,
-//        city: String,
-//        onLoading: (Boolean) -> Unit,
-//        onResult: (WeatherResponse?) -> Unit
-//    ) {
-//        viewModelScope.launch {
 //
 //
 //
