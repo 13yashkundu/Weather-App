@@ -1,150 +1,404 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_blue_purple_gradient"
-    tools:context=".Home_page"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp">
-
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WeatherZ"
-        android:textColor="@color/primary_text"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-black"
-        android:letterSpacing="0.08"
-        android:drawableStart="@drawable/ic_logo_cloud"
-        android:drawablePadding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/search_container"
-        app:layout_constraintBottom_toBottomOf="@id/search_container" />
-
-    <LinearLayout
-        android:id="@+id/search_container"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_search_bar"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="12dp"
-        android:paddingEnd="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="Search city..."
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/primary_text"
-            android:textColorHint="@color/secondry_text"
-            android:textSize="13sp" />
-
-        <ImageView
-            android:id="@+id/search_button"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@drawable/bg_search_btn"
-            android:contentDescription="Search"
-            android:padding="7dp"
-            android:src="@drawable/search_icon"
-            app:tint="#FFFFFF" />
-
-    </LinearLayout>
+    android:fillViewport="true"
+    tools:context=".Home_page">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/weather_card"
-        android:layout_width="0dp"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_weather_card"
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_container">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
 
         <TextView
-            android:id="@+id/city_name"
+            android:id="@+id/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📍New Delhi"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:drawablePadding="8dp"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.08"
+            android:text="WeatherZ"
+            android:textColor="@color/primary_text"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_logo_cloud"
+            app:layout_constraintBottom_toBottomOf="@id/search_container"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/search_container" />
 
-        <TextView
-            android:id="@+id/local_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="21:39 local time"
-            android:textColor="@color/secondry_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/city_name" />
-
-        <TextView
-            android:id="@+id/temprature_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/search_container"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:text="22 °C"
-            android:textColor="@color/temp_main"
-            android:textSize="36sp"
+            android:background="@drawable/bg_search_bar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="postalAddress"
+                android:background="@null"
+                android:hint="Search city..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/primary_text"
+                android:textColorHint="@color/secondry_text"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/search_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_search_btn"
+                android:contentDescription="Search button"
+                android:padding="7dp"
+                android:src="@drawable/search_icon"
+                app:tint="#FFFFFF" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/weather_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_weather_card"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_container">
+
+            <TextView
+                android:id="@+id/city_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📍New Delhi"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/local_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="21:39 local time"
+                android:textColor="@color/secondry_text"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/city_name" />
+
+            <TextView
+                android:id="@+id/temprature_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="22 °C"
+                android:textColor="@color/temp_main"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/local_time" />
+
+            <ImageView
+                android:id="@+id/icon_day"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:contentDescription="Weather condition icon"
+                android:src="@drawable/night_icon"
+                app:tint="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@id/temprature_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/temprature_main" />
+
+            <TextView
+                android:id="@+id/min_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Min: 18 °C"
+                android:textColor="@color/temp_min"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temprature_main" />
+
+            <TextView
+                android:id="@+id/max_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Max: 24 °C"
+                android:textColor="@color/temp_max"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/min_temp"
+                app:layout_constraintStart_toEndOf="@id/min_temp"
+                app:layout_constraintTop_toTopOf="@id/min_temp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Today's Highlights Heading -->
+        <TextView
+            android:id="@+id/highlight_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Today's Highlights"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/local_time" />
+            app:layout_constraintTop_toBottomOf="@id/weather_card" />
 
-        <ImageView
-            android:id="@+id/icon_day"
-            android:layout_width="50dp"
+        <!-- 2x2 Highlights Grid (Sunrise/Sunset, UV Index, Visibility, Humidity) -->
+        <GridLayout
+            android:id="@+id/today_highlight_grid"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/night_icon"
-            app:layout_constraintTop_toTopOf="@id/temprature_main"
-            app:layout_constraintBottom_toBottomOf="@id/temprature_main"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            android:id="@+id/min_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Min: 18 °C"
-            android:textColor="@color/temp_min"
-            android:textSize="14sp"
+            android:layout_marginTop="12dp"
+            android:columnCount="2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/temprature_main" />
+            app:layout_constraintTop_toBottomOf="@id/highlight_heading">
 
-        <TextView
-            android:id="@+id/max_temp"
-            android:layout_width="wrap_content"
+            <!-- Card 1: Sunrise & Sunset -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_sunrise"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/bg_weather_card"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/label_sunrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌅 SUNRISE"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_sunrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="06:12 AM"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_sunrise" />
+
+                <TextView
+                    android:id="@+id/text_sunset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Sunset: 06:45 PM"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_sunrise" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Card 2: UV Index -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_uv_index"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/bg_weather_card"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/label_uv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="☀️ UV INDEX"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_uv_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="4"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_uv" />
+
+                <TextView
+                    android:id="@+id/text_uv_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Moderate"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_uv_val" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Card 3: Visibility -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_visibility"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/bg_weather_card"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/label_visibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👁️ VISIBILITY"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_vis_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="10 km"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_visibility" />
+
+                <TextView
+                    android:id="@+id/text_vis_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Clear view"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_vis_val" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Card 4: Humidity -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_humidity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/bg_weather_card"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/label_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💧 HUMIDITY"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_humidity_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="64%"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_humidity" />
+
+                <TextView
+                    android:id="@+id/text_humidity_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Dew point: 14°"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_humidity_val" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </GridLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/forecast_card"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Max: 24 °C"
-            android:textColor="@color/temp_max"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/min_temp"
-            app:layout_constraintStart_toEndOf="@id/min_temp"
-            app:layout_constraintTop_toTopOf="@id/min_temp" />
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/today_highlight_grid">
 
+            <TextView
+                android:id="@+id/forecast_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7 Days Forecast"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/forecast_heading"
+                tools:itemCount="7"
+                tools:listitem="@layout/fragment_forecast_card" />
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
