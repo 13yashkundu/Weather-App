@@ -48,7 +48,8 @@ class Home_page : Fragment() {
         viewBinding.tempratureMain.text = "${weather.current.temp_c} °C"
         viewBinding.localTime.text = "${weather.location.localtime}"
         viewBinding.cityName.text = "${weather.location.name}"
-//        viewBinding.minTemp.text = "${weather.forecastResponse.forecast.forecastday.}"
+        viewBinding.minTemp.text = "${weather.forecastResponse.forecast.forecastday[0].day.mintemp_c}"
+        viewBinding.maxTemp.text = "${weather.forecastResponse.forecast.forecastday[0].day.maxtemp_c}"
     }
 
     fun searchCity(){
