@@ -1,6 +1,7 @@
 
 package com.example.weatherz_app
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -19,7 +20,27 @@ class Weather_ViewModel : ViewModel() {
         city: String
     ) {
         viewModelScope.launch {
-            repository.fetchWeather(key, city)
+
+            val result: WeatherResponse? = try {
+                repository.fetchWeather(key, city)
+            } catch (e: HttpException) {
+                Log.e(
+                    "WeatherAPI", "HTTP error: ${e.code()}", e
+                )
+                null
+            } catch (e: IOException) {
+                Log.e(
+                    "WeatherAPI", "Network error", e
+                )
+                null
+            } catch (e: Exception) {
+                Log.e(
+                    "WeatherAPI", "Unexpected error", e
+                )
+                null
+            } finally {
+                isLoading = false
+            }
         }
     }
 }
@@ -30,27 +51,7 @@ class Weather_ViewModel : ViewModel() {
 //            isLoading = true
 //            onLoading(true)
 //
-//            val result: WeatherResponse? = try {
-//                repository.fetchWeather(key, city)
-//            } catch (e: HttpException) {
-//                android.util.Log.e(
-//                    "WeatherAPI", "HTTP error: ${e.code()}", e
-//                )
-//                null
-//            } catch (e: IOException) {
-//                android.util.Log.e(
-//                    "WeatherAPI", "Network error", e
-//                )
-//                null
-//            } catch (e: Exception) {
-//                android.util.Log.e(
-//                    "WeatherAPI", "Unexpected error", e
-//                )
-//                null
-//            } finally {
-//                isLoading = false
-//                onLoading(false)
-//            }
+
 //
 //            onResult(result)
 //        }

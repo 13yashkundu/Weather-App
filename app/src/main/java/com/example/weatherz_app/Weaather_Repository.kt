@@ -4,7 +4,7 @@ class Weaather_Repository {
     suspend fun fetchWeather(
         key: String,
         city: String
-    ) {
+    ): WeatherResponse {
 
     }
 }

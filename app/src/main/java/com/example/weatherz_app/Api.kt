@@ -1,5 +1,6 @@
 package com.example.weatherz_app
 
+import androidx.constraintlayout.motion.widget.Key
 import okhttp3.internal.concurrent.Task
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -35,3 +36,13 @@ import retrofit2.http.Query
 //    ) : profileData
 //
 //}
+
+interface Api_setup{
+    @GET("v1/forecast.json")
+    suspend fun getWeather(
+        @Query("key") apiKey: String,
+        @Query("q") city : String,
+        @Query("days") days : Int,
+        @Query("aqi") aqi : String = "yes"
+    )
+}
