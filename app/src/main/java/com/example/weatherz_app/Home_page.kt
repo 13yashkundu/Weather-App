@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.weatherz_app.databinding.FragmentHomePageBinding
+import kotlinx.coroutines.launch
 
 class Home_page : Fragment() {
 
@@ -31,6 +33,22 @@ class Home_page : Fragment() {
             searchCity()
             true
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            vm.weatherUIState.collect { state ->
+                updateWeatherUI(state)
+            }
+        }
+    }
+
+    private fun updateWeatherUI(state: WeatherUIState) {
+
+        val weather = state.result ?: return
+
+        viewBinding.tempratureMain.text = "${weather.current.temp_c} °C"
+        viewBinding.localTime.text = "${weather.location.localtime}"
+        viewBinding.cityName.text = "${weather.location.name}"
+//        viewBinding.minTemp.text = "${weather.forecastResponse.forecast.forecastday.}"
     }
 
     fun searchCity(){
