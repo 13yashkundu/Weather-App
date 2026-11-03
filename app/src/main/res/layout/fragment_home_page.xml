@@ -128,6 +128,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/temprature_main" />
 
+            <TextView
+                android:id="@+id/weather_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Sunny"
+                android:textColor="@color/primary_text"
+                app:layout_constraintTop_toBottomOf="@id/temprature_main"
+                app:layout_constraintStart_toStartOf="@id/temprature_main"/>
+
+
 
             <TextView
                 android:id="@+id/min_temp_t"
@@ -138,7 +149,7 @@
                 android:textColor="@color/temp_min"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/temprature_main" />
+                app:layout_constraintTop_toBottomOf="@id/weather_condition" />
 
             <TextView
                 android:id="@+id/min_temp"
@@ -154,13 +165,12 @@
                 android:id="@+id/max_temp_t"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="15dp"
                 android:text="Max: "
                 android:textColor="@color/temp_max"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/min_temp"
-                app:layout_constraintTop_toBottomOf="@id/temprature_main" />
+                app:layout_constraintTop_toTopOf="@id/min_temp" />
 
             <TextView
                 android:id="@+id/max_temp"
@@ -170,7 +180,7 @@
                 android:textColor="@color/temp_max"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/max_temp_t"
-                app:layout_constraintTop_toTopOf="@id/min_temp_t"/>
+                app:layout_constraintTop_toTopOf="@id/max_temp_t"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

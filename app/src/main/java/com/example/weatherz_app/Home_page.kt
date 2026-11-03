@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherz_app.databinding.FragmentHomePageBinding
 import kotlinx.coroutines.launch
 
@@ -42,24 +43,36 @@ class Home_page : Fragment() {
     }
 
     private fun updateWeatherUI(state: WeatherUIState) {
-
         val weather = state.result ?: return
 
+        viewBinding.cityName.text = "📍 ${weather.location.name}"
+        viewBinding.localTime.text = "local time: ${weather.location.localtime}"
         viewBinding.tempratureMain.text = "${weather.current.temp_c} °C"
-        viewBinding.localTime.text = "${weather.location.localtime}"
-        viewBinding.cityName.text = "\uD83D\uDCCD ${weather.location.name}"
+        viewBinding.weatherCondition.text = weather.current.condition.text
         viewBinding.minTemp.text = "${weather.forecast.forecastday[0].day.mintemp_c} °C"
         viewBinding.maxTemp.text = "${weather.forecast.forecastday[0].day.maxtemp_c} °C"
-    }
+
+        viewBinding.textSunrise.text = weather.forecast.forecastday[0].astro.sunrise
+        viewBinding.textSunset.text = "Sunset: ${weather.forecast.forecastday[0].astro.sunset}"
+        viewBinding.textHumidityVal.text = "${weather.current.humidity}%"
+//
+//        val forecastItems = weather.forecast.forecastday.map {
+//            ForecastItem(it.date, "${it.day.maxtemp_c} °C")
+//        }
+//        viewBinding.fragmentRecycler.layoutManager =
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        viewBinding.fragmentRecycler.adapter = ForecastAdapter(forecastItems)
+//    }
 
     fun searchCity(){
-        var city = viewBinding.searchBar.text.toString().trim()
+        val city = viewBinding.searchBar.text.toString().trim()
         if (city.isEmpty()){
             viewBinding.searchBar.error = "Enter city name"
             return
         }
         vm.fetchWeather(
-            BuildConfig.API_Key
-            , city)
+            BuildConfig.API_Key,
+            city
+        )
     }
 }

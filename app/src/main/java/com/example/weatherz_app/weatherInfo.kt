@@ -1,6 +1,5 @@
 package com.example.weatherz_app
 
-
 data class WeatherResponse(
     val location: LocationInfo,
     val current: CurrentInfo,
@@ -26,28 +25,28 @@ data class ConditionInfo(
     val icon: String
 )
 
-
 data class forecastResponse(
-    val forecastday : List<ForecastDay>
+    val forecastday: List<ForecastDay>
 )
 
 data class ForecastDay(
-    val day : Day,
-    val astro : Astro
+    val date: String = "",
+    val day: Day,
+    val astro: Astro
 )
 
 data class Astro(
-    val sunrise : String,
-    val sunset : String
+    val sunrise: String,
+    val sunset: String
 )
 
 data class Day(
-    val maxtemp_c : Double,
-    val mintemp_c : Double,
-    val condition : Condition
+    val maxtemp_c: Double,
+    val mintemp_c: Double,
+    val condition: Condition
 )
 
 data class Condition(
-    val text : String,
-    val icon : String
+    val text: String,
+    val icon: String
 )
