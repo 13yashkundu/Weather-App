@@ -1,11 +1,10 @@
 package com.example.weatherz_app
 
-import okio.Sink
 
 data class WeatherResponse(
     val location: LocationInfo,
     val current: CurrentInfo,
-    val forecastResponse: forecastResponse
+    val forecast: forecastResponse
 )
 
 data class LocationInfo(
@@ -27,11 +26,8 @@ data class ConditionInfo(
     val icon: String
 )
 
-data class forecastResponse(
-    val forecast : Forecast
-)
 
-data class Forecast(
+data class forecastResponse(
     val forecastday : List<ForecastDay>
 )
 
