@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.weatherz_app.databinding.FragmentHomePageBinding
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
+import kotlin.math.roundToInt
 
 class Home_page : Fragment() {
 
@@ -48,9 +51,12 @@ class Home_page : Fragment() {
     private fun updateWeatherUI(state: WeatherUIState) {
         val weather = state.result ?: return
 
+        val localtime = weather.location.localtime.substringAfter(" ")
+        val currentTempRounded = weather.current.temp_c.roundToInt()
+
         viewBinding.cityName.text = "📍 ${weather.location.name}"
-        viewBinding.localTime.text = "local time: ${weather.location.localtime}"
-        viewBinding.tempratureMain.text = "${weather.current.temp_c} °C"
+        viewBinding.localTime.text = "local time: $localtime"
+        viewBinding.tempratureMain.text = "$currentTempRounded °C"
         viewBinding.weatherCondition.text = weather.current.condition.text
 
         // Weather condition icon via Glide
@@ -63,11 +69,17 @@ class Home_page : Fragment() {
                 .into(viewBinding.iconDay)
         }
 
-        viewBinding.minTemp.text = "${weather.forecast.forecastday[0].day.mintemp_c} °C"
-        viewBinding.maxTemp.text = "${weather.forecast.forecastday[0].day.maxtemp_c} °C"
+        val firstDay = weather.forecast.forecastday.firstOrNull()
+        if (firstDay != null) {
+            val minTempRounded = firstDay.day.mintemp_c.roundToInt()
+            val maxTempRounded = firstDay.day.maxtemp_c.roundToInt()
 
-        viewBinding.textSunrise.text = weather.forecast.forecastday[0].astro.sunrise
-        viewBinding.textSunset.text = "Sunset: ${weather.forecast.forecastday[0].astro.sunset}"
+            viewBinding.minTemp.text = "$minTempRounded °C"
+            viewBinding.maxTemp.text = "$maxTempRounded °C"
+            viewBinding.textSunrise.text = firstDay.astro.sunrise
+            viewBinding.textSunset.text = "Sunset: ${firstDay.astro.sunset}"
+        }
+
         viewBinding.textHumidityVal.text = "${weather.current.humidity}%"
         viewBinding.textVisVal.text = "${weather.current.vis_km} km"
 
@@ -78,9 +90,10 @@ class Home_page : Fragment() {
         }
 
         val forecastItem = weather.forecast.forecastday.map {
+            val roundedForecastTemp = it.day.maxtemp_c.roundToInt()
             ForecastItem(
-                day = if (it.date.length >= 10) it.date.substring(5) else it.date,
-                temp = "${it.day.maxtemp_c} °C",
+                day = formatDateToDayName(it.date),
+                temp = "$roundedForecastTemp °C",
                 iconUrl = it.day.condition.icon
             )
         }
@@ -91,6 +104,17 @@ class Home_page : Fragment() {
             false
         )
         viewBinding.fragmentRecycler.adapter = ForecastAdapter(forecastItem)
+    }
+
+    private fun formatDateToDayName(dateString: String): String {
+        return try {
+            val inFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val outFormat = SimpleDateFormat("EEE", Locale.getDefault())
+            val date = inFormat.parse(dateString)
+            if (date != null) outFormat.format(date) else dateString
+        } catch (e: Exception) {
+            dateString
+        }
     }
 
     fun searchCity(name: String) {
