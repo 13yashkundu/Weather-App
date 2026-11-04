@@ -55,14 +55,16 @@ class Home_page : Fragment() {
         viewBinding.textSunrise.text = weather.forecast.forecastday[0].astro.sunrise
         viewBinding.textSunset.text = "Sunset: ${weather.forecast.forecastday[0].astro.sunset}"
         viewBinding.textHumidityVal.text = "${weather.current.humidity}%"
-//
-//        val forecastItems = weather.forecast.forecastday.map {
-//            ForecastItem(it.date, "${it.day.maxtemp_c} °C")
-//        }
-//        viewBinding.fragmentRecycler.layoutManager =
-//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//        viewBinding.fragmentRecycler.adapter = ForecastAdapter(forecastItems)
-//    }
+
+        val forecastItem = weather.forecast.forecastday.map {
+            ForecastItem(it.date,
+                "${it.day.maxtemp_c }")
+        }
+
+        viewBinding.fragmentRecycler.layoutManager = LinearLayoutManager(requireContext())
+        viewBinding.fragmentRecycler.adapter = ForecastAdapter(forecastItem)
+
+    }
 
     fun searchCity(){
         val city = viewBinding.searchBar.text.toString().trim()
