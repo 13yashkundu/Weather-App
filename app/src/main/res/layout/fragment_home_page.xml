@@ -461,7 +461,10 @@
                 tools:listitem="@layout/fragment_forecast_card" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
