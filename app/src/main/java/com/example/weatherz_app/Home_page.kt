@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.weatherz_app.databinding.FragmentHomePageBinding
 import kotlinx.coroutines.launch
 
@@ -27,7 +28,6 @@ class Home_page : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Load default city weather when Fragment view is created
         searchCity("New Delhi")
 
         viewBinding.searchButton.setOnClickListener {
@@ -52,24 +52,37 @@ class Home_page : Fragment() {
         viewBinding.localTime.text = "local time: ${weather.location.localtime}"
         viewBinding.tempratureMain.text = "${weather.current.temp_c} °C"
         viewBinding.weatherCondition.text = weather.current.condition.text
+
+        // Weather condition icon via Glide
+        val iconUrl = weather.current.condition.icon
+        if (iconUrl.isNotEmpty()) {
+            val fullIconUrl = if (iconUrl.startsWith("//")) "https:$iconUrl" else iconUrl
+            Glide.with(this)
+                .load(fullIconUrl)
+                .placeholder(R.drawable.night_icon)
+                .into(viewBinding.iconDay)
+        }
+
         viewBinding.minTemp.text = "${weather.forecast.forecastday[0].day.mintemp_c} °C"
         viewBinding.maxTemp.text = "${weather.forecast.forecastday[0].day.maxtemp_c} °C"
 
         viewBinding.textSunrise.text = weather.forecast.forecastday[0].astro.sunrise
         viewBinding.textSunset.text = "Sunset: ${weather.forecast.forecastday[0].astro.sunset}"
         viewBinding.textHumidityVal.text = "${weather.current.humidity}%"
-        viewBinding.textVisVal.text = "${weather.current.vis_km }"
-        if (weather.current.vis_km>14){
-            viewBinding.textVisDesc.text ="Good"
-        }
-        else if (weather.current.vis_km>6){
-            viewBinding.textVisDesc.text ="Poor"
-        }else{
-            viewBinding.textVisDesc.text ="Very poor"
+        viewBinding.textVisVal.text = "${weather.current.vis_km} km"
+
+        viewBinding.textVisDesc.text = when {
+            weather.current.vis_km >= 10.0 -> "Clear View"
+            weather.current.vis_km >= 5.0 -> "Moderate View"
+            else -> "Poor Visibility"
         }
 
         val forecastItem = weather.forecast.forecastday.map {
-            ForecastItem(it.date, "${it.day.maxtemp_c} °C")
+            ForecastItem(
+                day = if (it.date.length >= 10) it.date.substring(5) else it.date,
+                temp = "${it.day.maxtemp_c} °C",
+                iconUrl = it.day.condition.icon
+            )
         }
 
         viewBinding.fragmentRecycler.layoutManager = LinearLayoutManager(

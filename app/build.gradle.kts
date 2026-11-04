@@ -60,6 +60,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation(libs.androidx.activity.ktx)
     implementation("androidx.fragment:fragment-ktx:1.8.6")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)

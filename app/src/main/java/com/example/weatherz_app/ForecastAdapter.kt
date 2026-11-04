@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 data class ForecastItem(
     val day: String,
     val temp: String,
-    val iconRes: Int = R.drawable.night_icon
+    val iconUrl: String = ""
 )
 
 class ForecastAdapter(
@@ -32,8 +33,17 @@ class ForecastAdapter(
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
         val item = forecastList[position]
         holder.tempText.text = item.temp
-        holder.iconImage.setImageResource(item.iconRes)
         holder.dayText.text = item.day
+
+        if (item.iconUrl.isNotEmpty()) {
+            val fullUrl = if (item.iconUrl.startsWith("//")) "https:${item.iconUrl}" else item.iconUrl
+            Glide.with(holder.itemView.context)
+                .load(fullUrl)
+                .placeholder(R.drawable.night_icon)
+                .into(holder.iconImage)
+        } else {
+            holder.iconImage.setImageResource(R.drawable.night_icon)
+        }
     }
 
     override fun getItemCount(): Int = forecastList.size
