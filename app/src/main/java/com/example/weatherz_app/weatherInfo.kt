@@ -17,6 +17,7 @@ data class CurrentInfo(
     val humidity: Int,
     val is_day: Int,
     val last_updated: String,
+    val vis_km : Double,
     val condition: ConditionInfo
 )
 

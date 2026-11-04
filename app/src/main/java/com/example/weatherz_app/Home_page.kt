@@ -58,6 +58,15 @@ class Home_page : Fragment() {
         viewBinding.textSunrise.text = weather.forecast.forecastday[0].astro.sunrise
         viewBinding.textSunset.text = "Sunset: ${weather.forecast.forecastday[0].astro.sunset}"
         viewBinding.textHumidityVal.text = "${weather.current.humidity}%"
+        viewBinding.textVisVal.text = "${weather.current.vis_km }"
+        if (weather.current.vis_km>14){
+            viewBinding.textVisDesc.text ="Good"
+        }
+        else if (weather.current.vis_km>6){
+            viewBinding.textVisDesc.text ="Poor"
+        }else{
+            viewBinding.textVisDesc.text ="Very poor"
+        }
 
         val forecastItem = weather.forecast.forecastday.map {
             ForecastItem(it.date, "${it.day.maxtemp_c} °C")
