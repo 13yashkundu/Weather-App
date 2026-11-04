@@ -27,11 +27,14 @@ class Home_page : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Load default city weather when Fragment view is created
+        searchCity("New Delhi")
+
         viewBinding.searchButton.setOnClickListener {
-            searchCity()
+            searchCity(viewBinding.searchBar.text.toString().trim())
         }
         viewBinding.searchBar.setOnEditorActionListener { _, _, _ ->
-            searchCity()
+            searchCity(viewBinding.searchBar.text.toString().trim())
             true
         }
 
@@ -57,18 +60,20 @@ class Home_page : Fragment() {
         viewBinding.textHumidityVal.text = "${weather.current.humidity}%"
 
         val forecastItem = weather.forecast.forecastday.map {
-            ForecastItem(it.date,
-                "${it.day.maxtemp_c }")
+            ForecastItem(it.date, "${it.day.maxtemp_c} °C")
         }
 
-        viewBinding.fragmentRecycler.layoutManager = LinearLayoutManager(requireContext())
+        viewBinding.fragmentRecycler.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
         viewBinding.fragmentRecycler.adapter = ForecastAdapter(forecastItem)
-
     }
 
-    fun searchCity(){
-        val city = viewBinding.searchBar.text.toString().trim()
-        if (city.isEmpty()){
+    fun searchCity(name: String) {
+        val city = name
+        if (city.isEmpty()) {
             viewBinding.searchBar.error = "Enter city name"
             return
         }
