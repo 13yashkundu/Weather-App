@@ -74,13 +74,6 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main_screen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/app_name">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weather_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -89,7 +82,7 @@
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintTop_toBottomOf="@id/search_container">
 
             <TextView
                 android:id="@+id/city_name"
@@ -461,10 +454,6 @@
                 tools:listitem="@layout/fragment_forecast_card" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
