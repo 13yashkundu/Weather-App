@@ -18,6 +18,7 @@ data class CurrentInfo(
     val is_day: Int,
     val last_updated: String,
     val vis_km : Double,
+    val uv : Double,
     val condition: ConditionInfo
 )
 

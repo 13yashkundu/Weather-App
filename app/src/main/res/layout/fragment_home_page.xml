@@ -429,11 +429,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Dew point: 14°"
+                    android:text="Comfortable"
                     android:textColor="@color/secondry_text"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_humidity_val" />
+
+                <ProgressBar
+                    android:id="@+id/humidity_progress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="8dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="64"
+                    android:progressBackgroundTint="#45516F"
+                    android:progressTint="#70C6FF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_humidity_desc" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

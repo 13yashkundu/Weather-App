@@ -86,7 +86,35 @@ class Home_page : Fragment() {
             viewBinding.textSunset.text = "Sunset: ${firstDay.astro.sunset}"
         }
 
-        viewBinding.textHumidityVal.text = "${weather.current.humidity}%"
+
+        val UV_value = weather.current.uv
+        viewBinding.textUvVal.text = UV_value.toString()
+        viewBinding.uvProgress.max = 11
+        viewBinding.uvProgress.progress = UV_value.toInt().coerceIn(0,11)
+
+        viewBinding.textUvDesc.text = when{
+            UV_value < 3 -> "Low"
+            UV_value <6  -> "Moderate"
+            UV_value < 8 -> "High"
+            UV_value < 11 -> "Very High"
+            else -> "Extreme"
+        }
+
+
+        val humidity = weather.current.humidity
+
+        viewBinding.textHumidityVal.text = humidity.toString()
+        viewBinding.humidityProgress.max = 100
+        viewBinding.uvProgress.progress = humidity
+
+        viewBinding.textHumidityDesc.text = when{
+            humidity < 30 -> "Dry Air"
+            humidity <= 60 -> "Comfortable"
+            humidity <= 80 -> "Humid"
+            else -> "High Humidity"
+        }
+
+
         viewBinding.textVisVal.text = "${weather.current.vis_km} km"
 
         viewBinding.textVisDesc.text = when {
