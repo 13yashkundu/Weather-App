@@ -15,6 +15,11 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.roundToInt
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.components.XAxis
 
 class Home_page : Fragment() {
 
@@ -33,6 +38,7 @@ class Home_page : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         searchCity("New Delhi")
+        temp_chart_setup()
 
         viewBinding.searchButton.setOnClickListener {
             searchCity(viewBinding.searchBar.text.toString().trim())
@@ -138,7 +144,54 @@ class Home_page : Fragment() {
             false
         )
         viewBinding.fragmentRecycler.adapter = ForecastAdapter(forecastItem)
+        
+        val hourlyData = weather.forecast.forecastday
+            .flatMap { it.hour }
+            .take(24)
+
+        val entries = hourlyData.mapIndexed { index, hour->
+            Entry(index.toFloat(), hour.temp_c.toFloat())
+        }
+
+        val dataSet = LineDataSet(entries, "Temperature")
+
+        dataSet.color = android.graphics.Color.WHITE
+        dataSet.setCircleColor(android.graphics.Color.WHITE)
+        dataSet.lineWidth = 2f
+        dataSet.circleRadius = 3f
+        dataSet.setDrawValues(false)
+        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+        dataSet.setDrawFilled(true)
+        dataSet.fillColor = android.graphics.Color.WHITE
+        dataSet.fillAlpha = 35
+
+        val lineData = LineData(dataSet)
+
+        viewBinding.temperatureChart.data = lineData
+        viewBinding.temperatureChart.invalidate()
     }
+
+
+//    hourly forecast chart
+
+
+    fun temp_chart_setup(){
+        val chart = viewBinding.temperatureChart
+
+        chart.data
+        chart.description.isEnabled = false
+        chart.legend.isEnabled = false
+        chart.axisRight.isEnabled = false
+
+        chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        chart.xAxis.textColor = android.graphics.Color.WHITE
+
+        chart.axisLeft.textColor = android.graphics.Color.WHITE
+        chart.setTouchEnabled(true)
+        chart.setPinchZoom(false)
+        chart.setScaleEnabled(false)
+    }
+
 
     private fun formatDateToDayName(dateString: String): String {
         return try {
@@ -162,4 +215,5 @@ class Home_page : Fragment() {
             city
         )
     }
+
 }
