@@ -34,7 +34,13 @@ data class forecastResponse(
 data class ForecastDay(
     val date: String = "",
     val day: Day,
-    val astro: Astro
+    val astro: Astro,
+    val hour : List<hourly>
+)
+
+data class hourly(
+    val time : String,
+    val temp_c : Double
 )
 
 data class Astro(

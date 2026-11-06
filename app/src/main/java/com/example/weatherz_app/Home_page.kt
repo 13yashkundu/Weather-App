@@ -103,9 +103,9 @@ class Home_page : Fragment() {
 
         val humidity = weather.current.humidity
 
-        viewBinding.textHumidityVal.text = humidity.toString()
+        viewBinding.textHumidityVal.text = "$humidity%"
         viewBinding.humidityProgress.max = 100
-        viewBinding.uvProgress.progress = humidity
+        viewBinding.humidityProgress.progress = humidity.coerceIn(0, 100)
 
         viewBinding.textHumidityDesc.text = when{
             humidity < 30 -> "Dry Air"
