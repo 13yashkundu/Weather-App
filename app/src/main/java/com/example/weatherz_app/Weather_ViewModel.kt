@@ -13,7 +13,8 @@ import java.io.IOException
 
 data class WeatherUIState(
     val isLoading : Boolean = false,
-    val result : WeatherResponse? = null
+    val result : WeatherResponse? = null,
+    val error : String? = null
 )
 class Weather_ViewModel : ViewModel() {
 
@@ -27,7 +28,8 @@ class Weather_ViewModel : ViewModel() {
     ) {
         viewModelScope.launch {
             _weatherUIState.update {
-                it.copy(isLoading = true)
+                it.copy(isLoading = true,
+                    error = null)
             }
             val response: WeatherResponse? = try {
                 repository.fetchWeather(key, city)
@@ -36,16 +38,25 @@ class Weather_ViewModel : ViewModel() {
                 Log.e(
                     "WeatherAPI", "HTTP error: ${e.code()}", e
                 )
+                _weatherUIState.update {
+                    it.copy(error = "Invalid City name")
+                }
                 null
             } catch (e: IOException) {
                 Log.e(
                     "WeatherAPI", "Network error", e
                 )
+                _weatherUIState.update {
+                    it.copy(error = "Plese check you internet conection and try again later")
+                }
                 null
             } catch (e: Exception) {
                 Log.e(
                     "WeatherAPI", "Unexpected error", e
                 )
+                _weatherUIState.update {
+                    it.copy(error = "Something went wrong, try again later")
+                }
                 null
             }
                 _weatherUIState.update {

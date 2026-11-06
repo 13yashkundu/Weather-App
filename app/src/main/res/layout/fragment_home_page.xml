@@ -13,8 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="20dp"
+        android:paddingTop="48dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="24dp">
+        android:paddingBottom="100dp">
 
         <TextView
             android:id="@+id/app_name"
@@ -68,7 +69,7 @@
                 android:background="@drawable/bg_search_btn"
                 android:contentDescription="Search button"
                 android:padding="7dp"
-                android:src="@drawable/search_icon"
+                android:src="@drawable/ic_nav_search"
                 app:tint="#FFFFFF" />
 
         </LinearLayout>
