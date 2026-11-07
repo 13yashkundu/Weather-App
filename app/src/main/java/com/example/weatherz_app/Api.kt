@@ -42,7 +42,7 @@ interface Api_setup{
     suspend fun getWeather(
         @Query("key") apiKey: String,
         @Query("q") city : String,
-        @Query("days") days : Int = 2,
+        @Query("days") days : Int = 3,
         @Query("aqi") aqi : String = "yes"
     ): WeatherResponse
 }

@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.formatter.ValueFormatter
 
 class Home_page : Fragment() {
 
@@ -144,9 +145,12 @@ class Home_page : Fragment() {
             false
         )
         viewBinding.fragmentRecycler.adapter = ForecastAdapter(forecastItem)
-        
+
+        val currentTime = weather.location.localtime
+
         val hourlyData = weather.forecast.forecastday
             .flatMap { it.hour }
+            .filter { it.time >= currentTime }
             .take(24)
 
         val entries = hourlyData.mapIndexed { index, hour->
@@ -167,8 +171,27 @@ class Home_page : Fragment() {
 
         val lineData = LineData(dataSet)
 
+        val timeLabels = hourlyData.map { hour ->
+            val hourValue = hour.time.substringAfter(" ").substringBefore(":").toInt()
+
+            when {
+                hourValue == 0 -> "12 AM"
+                hourValue < 12 -> "$hourValue AM"
+                hourValue == 12 -> "12 PM"
+                else -> "${hourValue - 12} PM"
+            }
+        }
         viewBinding.temperatureChart.data = lineData
         viewBinding.temperatureChart.invalidate()
+
+        val xAxis = viewBinding.temperatureChart.xAxis
+
+        xAxis.valueFormatter = IndexAxisValueFormatter(timeLabels)
+        xAxis.granularity = 1f
+        xAxis.isGranularityEnabled = true
+        xAxis.setDrawLabels(true)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+
     }
 
 
@@ -182,6 +205,18 @@ class Home_page : Fragment() {
         chart.description.isEnabled = false
         chart.legend.isEnabled = false
         chart.axisRight.isEnabled = false
+
+        chart.axisLeft.textColor = android.graphics.Color.WHITE
+//        chart.axisLeft.axisMinimum = 0f
+        chart.axisLeft.setDrawGridLines(false)
+
+        chart.setDrawBorders(false)
+
+        chart.axisLeft.valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                return "${value.toInt()}°C"
+            }
+        }
 
         chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         chart.xAxis.textColor = android.graphics.Color.WHITE
