@@ -151,6 +151,19 @@
                 tools:text="Sunny" />
 
             <TextView
+                android:id="@+id/feels_like_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/secondry_text"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/weather_condition"
+                app:layout_constraintStart_toEndOf="@id/weather_condition"
+                app:layout_constraintTop_toTopOf="@id/weather_condition"
+                tools:text="• Feels like 24 °C" />
+
+            <TextView
                 android:id="@+id/min_temp_t"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -347,7 +360,55 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Card 2: UV Index -->
+            <!-- Card 2: Wind Speed & Direction -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_wind"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="6dp"
+                android:background="@drawable/bg_weather_card"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/label_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="0.06"
+                    android:text="💨 WIND"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_wind_val"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/primary_text"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_wind"
+                    tools:text="14 km/h" />
+
+                <TextView
+                    android:id="@+id/text_wind_dir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/secondry_text"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_wind_val"
+                    tools:text="NW Direction" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <!-- Card 3: Visibility -->

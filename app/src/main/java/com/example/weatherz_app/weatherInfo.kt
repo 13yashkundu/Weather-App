@@ -14,11 +14,14 @@ data class LocationInfo(
 
 data class CurrentInfo(
     val temp_c: Double,
+    val feelslike_c: Double = 0.0,
     val humidity: Int,
     val is_day: Int,
     val last_updated: String,
     val vis_km : Double,
     val uv : Double,
+    val wind_kph : Double = 0.0,
+    val wind_dir : String = "",
     val condition: ConditionInfo
 )
 
