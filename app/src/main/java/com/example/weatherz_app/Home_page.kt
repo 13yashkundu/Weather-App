@@ -92,6 +92,9 @@ class Home_page : Fragment() {
         viewBinding.tempratureMain.text = "$currentTempRounded °C"
         viewBinding.weatherCondition.text = weather.current.condition.text
 
+        val feelsLikeRounded = weather.current.feelslike_c.roundToInt()
+        viewBinding.feelsLikeTemp.text = "• Feels like $feelsLikeRounded °C"
+
         val mainConditionColor = getWeatherConditionColor(weather.current.condition.text, weather.current.is_day)
         viewBinding.iconDay.imageTintList = ColorStateList.valueOf(mainConditionColor)
 
@@ -115,6 +118,10 @@ class Home_page : Fragment() {
             viewBinding.textSunrise.text = firstDay.astro.sunrise
             viewBinding.textSunset.text = "Sunset: ${firstDay.astro.sunset}"
         }
+
+        val windSpeedRounded = weather.current.wind_kph.roundToInt()
+        viewBinding.textWindVal.text = "$windSpeedRounded km/h"
+        viewBinding.textWindDir.text = if (weather.current.wind_dir.isNotEmpty()) "${weather.current.wind_dir} Direction" else "Gentle breeze"
 
 
         val UV_value = weather.current.uv
@@ -185,15 +192,22 @@ class Home_page : Fragment() {
 
         val dataSet = LineDataSet(entries, "Temperature")
 
-        dataSet.color = android.graphics.Color.WHITE
+        dataSet.color = android.graphics.Color.parseColor("#70C6FF")
         dataSet.setCircleColor(android.graphics.Color.WHITE)
-        dataSet.lineWidth = 2f
-        dataSet.circleRadius = 3f
+        dataSet.lineWidth = 2.5f
+        dataSet.circleRadius = 3.5f
         dataSet.setDrawValues(false)
         dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+
+        val chartFillGradient = android.graphics.drawable.GradientDrawable(
+            android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(
+                android.graphics.Color.parseColor("#6070C6FF"),
+                android.graphics.Color.parseColor("#0070C6FF")
+            )
+        )
+        dataSet.fillDrawable = chartFillGradient
         dataSet.setDrawFilled(true)
-        dataSet.fillColor = android.graphics.Color.WHITE
-        dataSet.fillAlpha = 35
 
         val lineData = LineData(dataSet)
 
