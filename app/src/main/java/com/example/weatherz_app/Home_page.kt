@@ -1,5 +1,8 @@
 package com.example.weatherz_app
 
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +42,7 @@ class Home_page : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         searchCity("New Delhi")
+
         temp_chart_setup()
 
         viewBinding.searchButton.setOnClickListener {
@@ -56,7 +60,22 @@ class Home_page : Fragment() {
         }
     }
 
+
     private fun updateWeatherUI(state: WeatherUIState) {
+
+        if (state.isLoading) {
+            viewBinding.loadingBlur.visibility = View.VISIBLE
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val blurEffect = RenderEffect.createBlurEffect(20f, 20f, Shader.TileMode.MIRROR)
+                viewBinding.main.setRenderEffect(blurEffect)
+            }
+        } else {
+            viewBinding.loadingBlur.visibility = View.GONE
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                viewBinding.main.setRenderEffect(null)
+            }
+        }
+
 
         if (state.error != null){
             Toast.makeText(requireContext(), state.error, Toast.LENGTH_LONG).show()
@@ -195,6 +214,20 @@ class Home_page : Fragment() {
     }
 
 
+//    weather card animation
+
+    fun animateWeatherCard() {
+        viewBinding.weatherCard.apply {
+            alpha = 0f
+            translationY = 30f
+
+            animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setDuration(600)
+                .start()
+        }
+    }
 //    hourly forecast chart
 
 

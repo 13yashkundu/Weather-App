@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_blue_purple_gradient"
-    android:fillViewport="true"
     tools:context=".Home_page">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingTop="48dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="100dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="48dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="100dp">
+
+
 
         <TextView
             android:id="@+id/app_name"
@@ -90,12 +96,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="📍New Delhi"
                 android:textColor="#FFFFFF"
                 android:textSize="21sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="📍New Delhi" />
 
             <TextView
                 android:id="@+id/local_time"
@@ -103,11 +109,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins"
-                android:text="21:39 local time"
                 android:textColor="@color/secondry_text"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/city_name" />
+                app:layout_constraintTop_toBottomOf="@id/city_name"
+                tools:text="21:39 local time" />
 
             <TextView
                 android:id="@+id/temprature_main"
@@ -115,34 +121,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="22 °C"
                 android:textColor="@color/temp_main"
                 android:textSize="46sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/local_time" />
+                app:layout_constraintTop_toBottomOf="@id/local_time"
+                tools:text="22 °C" />
 
             <ImageView
                 android:id="@+id/icon_day"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:contentDescription="Weather condition icon"
-                android:src="@drawable/night_icon"
                 app:tint="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="@id/temprature_main"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/temprature_main" />
+                app:layout_constraintTop_toTopOf="@id/temprature_main"
+                tools:src="@drawable/night_icon" />
 
             <TextView
                 android:id="@+id/weather_condition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Sunny"
                 android:textColor="@color/primary_text"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@id/temprature_main"
-                app:layout_constraintTop_toBottomOf="@id/temprature_main" />
+                app:layout_constraintTop_toBottomOf="@id/temprature_main"
+                tools:text="Sunny" />
 
             <TextView
                 android:id="@+id/min_temp_t"
@@ -161,11 +167,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="20 °C"
                 android:textColor="@color/temp_min"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/min_temp_t"
-                app:layout_constraintTop_toTopOf="@id/min_temp_t" />
+                app:layout_constraintTop_toTopOf="@id/min_temp_t"
+                tools:text="20 °C" />
 
             <TextView
                 android:id="@+id/max_temp_t"
@@ -184,11 +190,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="10 °C"
                 android:textColor="@color/temp_max"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/max_temp_t"
-                app:layout_constraintTop_toTopOf="@id/max_temp_t" />
+                app:layout_constraintTop_toTopOf="@id/max_temp_t"
+                tools:text="10 °C" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -236,12 +242,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/poppins"
-                android:text="9"
                 android:textColor="@color/primary_text"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label_uv" />
+                app:layout_constraintTop_toBottomOf="@id/label_uv"
+                tools:text="9" />
 
             <TextView
                 android:id="@+id/text_uv_desc"
@@ -249,12 +255,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/poppins"
-                android:text="Very High"
                 android:textColor="@color/secondry_text"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/text_uv_val"
                 app:layout_constraintStart_toEndOf="@id/text_uv_val"
-                app:layout_constraintTop_toTopOf="@id/text_uv_val" />
+                app:layout_constraintTop_toTopOf="@id/text_uv_val"
+                tools:text="Very High" />
 
             <ProgressBar
                 android:id="@+id/uv_progress"
@@ -264,12 +270,12 @@
                 android:layout_marginTop="10dp"
                 android:indeterminate="false"
                 android:max="11"
-                android:progress="9"
                 android:progressBackgroundTint="#45516F"
                 android:progressTint="#A9C7FF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_uv_val" />
+                app:layout_constraintTop_toBottomOf="@id/text_uv_val"
+                tools:progress="9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -313,12 +319,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins"
-                    android:text="06:12 AM"
                     android:textColor="@color/primary_text"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/label_sunrise" />
+                    app:layout_constraintTop_toBottomOf="@id/label_sunrise"
+                    tools:text="06:12 AM" />
 
                 <TextView
                     android:id="@+id/text_sunset"
@@ -326,11 +332,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Sunset: 06:45 PM"
                     android:textColor="@color/secondry_text"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_sunrise" />
+                    app:layout_constraintTop_toBottomOf="@id/text_sunrise"
+                    tools:text="Sunset: 06:45 PM" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -366,12 +372,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins"
-                    android:text="10 km"
                     android:textColor="@color/primary_text"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/label_visibility" />
+                    app:layout_constraintTop_toBottomOf="@id/label_visibility"
+                    tools:text="10 km" />
 
                 <TextView
                     android:id="@+id/text_vis_desc"
@@ -379,11 +385,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Clear view"
                     android:textColor="@color/secondry_text"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_vis_val" />
+                    app:layout_constraintTop_toBottomOf="@id/text_vis_val"
+                    tools:text="Clear view" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -416,12 +422,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins"
-                    android:text="64%"
                     android:textColor="@color/primary_text"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/label_humidity" />
+                    app:layout_constraintTop_toBottomOf="@id/label_humidity"
+                    tools:text="64%" />
 
                 <TextView
                     android:id="@+id/text_humidity_desc"
@@ -429,11 +435,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Comfortable"
                     android:textColor="@color/secondry_text"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_humidity_val" />
+                    app:layout_constraintTop_toBottomOf="@id/text_humidity_val"
+                    tools:text="Comfortable" />
 
                 <ProgressBar
                     android:id="@+id/humidity_progress"
@@ -443,12 +449,12 @@
                     android:layout_marginTop="8dp"
                     android:indeterminate="false"
                     android:max="100"
-                    android:progress="64"
                     android:progressBackgroundTint="#45516F"
                     android:progressTint="#70C6FF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_humidity_desc" />
+                    app:layout_constraintTop_toBottomOf="@id/text_humidity_desc"
+                    tools:progress="64" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -528,4 +534,29 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loading_blur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#800B0B0D"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/weatherLoading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminate="true"
+            android:indeterminateTint="#A9C7FF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
