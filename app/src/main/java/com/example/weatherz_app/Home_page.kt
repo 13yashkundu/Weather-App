@@ -1,5 +1,6 @@
 package com.example.weatherz_app
 
+import android.content.res.ColorStateList
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.os.Build
@@ -91,6 +92,9 @@ class Home_page : Fragment() {
         viewBinding.tempratureMain.text = "$currentTempRounded °C"
         viewBinding.weatherCondition.text = weather.current.condition.text
 
+        val mainConditionColor = getWeatherConditionColor(weather.current.condition.text, weather.current.is_day)
+        viewBinding.iconDay.imageTintList = ColorStateList.valueOf(mainConditionColor)
+
         // Weather condition icon via Glide
         val iconUrl = weather.current.condition.icon
         if (iconUrl.isNotEmpty()) {
@@ -156,7 +160,8 @@ class Home_page : Fragment() {
             ForecastItem(
                 day = formatDateToDayName(it.date),
                 temp = "$roundedForecastTemp °C",
-                iconUrl = it.day.condition.icon
+                iconUrl = it.day.condition.icon,
+                conditionText = it.day.condition.text
             )
         }
 
