@@ -116,7 +116,8 @@ class Home_page : Fragment() {
         val UV_value = weather.current.uv
         viewBinding.textUvVal.text = UV_value.toString()
         viewBinding.uvProgress.max = 11
-        viewBinding.uvProgress.progress = UV_value.toInt().coerceIn(0,11)
+        viewBinding.uvProgress.progress = UV_value.toInt().coerceIn(0, 11)
+        viewBinding.uvProgress.setOnTouchListener { _, _ -> true }
 
         viewBinding.textUvDesc.text = when{
             UV_value < 3 -> "Low"
@@ -132,6 +133,7 @@ class Home_page : Fragment() {
         viewBinding.textHumidityVal.text = "$humidity%"
         viewBinding.humidityProgress.max = 100
         viewBinding.humidityProgress.progress = humidity.coerceIn(0, 100)
+        viewBinding.humidityProgress.setOnTouchListener { _, _ -> true }
 
         viewBinding.textHumidityDesc.text = when{
             humidity < 30 -> "Dry Air"

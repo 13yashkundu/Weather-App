@@ -262,19 +262,27 @@
                 app:layout_constraintTop_toTopOf="@id/text_uv_val"
                 tools:text="Very High" />
 
-            <ProgressBar
+            <SeekBar
                 android:id="@+id/uv_progress"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="8dp"
+                android:clickable="false"
+                android:focusable="false"
                 android:indeterminate="false"
                 android:max="11"
-                android:progressDrawable="@drawable/custom_uv_progress_bar"
+                android:maxHeight="4dp"
+                android:minHeight="4dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:progressDrawable="@drawable/custom_uv_full_spectrum_track"
+                android:splitTrack="false"
+                android:thumb="@drawable/ic_progress_dot"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_uv_val"
-                tools:progress="9" />
+                tools:progress="5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -440,15 +448,23 @@
                     app:layout_constraintTop_toBottomOf="@id/text_humidity_val"
                     tools:text="Comfortable" />
 
-                <ProgressBar
+                <SeekBar
                     android:id="@+id/humidity_progress"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="12dp"
+                    android:layout_marginTop="8dp"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:indeterminate="false"
                     android:max="100"
-                    android:progressDrawable="@drawable/custom_humidity_progress_bar"
+                    android:maxHeight="4dp"
+                    android:minHeight="4dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:progressDrawable="@drawable/custom_humidity_full_spectrum_track"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/ic_progress_dot"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_humidity_desc"

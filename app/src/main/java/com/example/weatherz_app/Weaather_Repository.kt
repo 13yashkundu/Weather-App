@@ -7,7 +7,6 @@ class Weaather_Repository {
         key: String,
         city: String
     ): WeatherResponse? {
-        delay(2000)
         val result : WeatherResponse? =
             Url_setup.api.getWeather(key, city)
         return result
