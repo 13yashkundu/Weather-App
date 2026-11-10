@@ -62,7 +62,9 @@ class Weather_ViewModel : ViewModel() {
                 _weatherUIState.update {
                     it.copy(
                         isLoading = false,
-                        result = response
+                        result = response,
+                        error= null
+
                     )
             }
         }
