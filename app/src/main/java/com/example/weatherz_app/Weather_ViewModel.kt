@@ -27,8 +27,10 @@ class Weather_ViewModel : ViewModel() {
         city: String
     ) {
         viewModelScope.launch {
+            var err : String? = null
             _weatherUIState.update {
-                it.copy(isLoading = true,
+                it.copy(
+                    isLoading = true,
                     error = null)
             }
             val response: WeatherResponse? = try {
@@ -38,32 +40,26 @@ class Weather_ViewModel : ViewModel() {
                 Log.e(
                     "WeatherAPI", "HTTP error: ${e.code()}", e
                 )
-                _weatherUIState.update {
-                    it.copy(error = "Invalid City name")
-                }
+                err = "Enter valid city name"
                 null
             } catch (e: IOException) {
                 Log.e(
                     "WeatherAPI", "Network error", e
                 )
-                _weatherUIState.update {
-                    it.copy(error = "Plese check you internet conection and try again later")
-                }
+                err = "Check your internet conection"
                 null
             } catch (e: Exception) {
                 Log.e(
                     "WeatherAPI", "Unexpected error", e
                 )
-                _weatherUIState.update {
-                    it.copy(error = "Something went wrong, try again later")
-                }
+                err = "Something went wrong, try again later"
                 null
             }
                 _weatherUIState.update {
                     it.copy(
                         isLoading = false,
                         result = response,
-                        error= null
+                        error= err
 
                     )
             }
