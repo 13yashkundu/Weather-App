@@ -8,10 +8,10 @@ import androidx.room.Query
 @Dao
 interface DatabaseDAO {
     @Insert
-    fun insertHistory(databaseTabel: DatabaseTabel)
+    suspend fun insertHistory(databaseTabel: DatabaseTabel)
 
     @Query("SELECT * From search_history")
-    fun getHistory() : List<DatabaseTabel>
+    suspend fun getHistory() : List<DatabaseTabel>
 
     @Delete
     fun deleteHistory(data : DatabaseTabel)

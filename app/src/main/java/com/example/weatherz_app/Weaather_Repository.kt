@@ -18,7 +18,7 @@ class SearchHistory(context: Context){
     private val database = DatabaseProvider.getDatabase(context)
     private val dao = database.getAccessObject()
 
-    fun inserHistory(databaseTabel: DatabaseTabel){
+    suspend fun inserHistory(databaseTabel: DatabaseTabel){
 
         dao.insertHistory(databaseTabel)
 
@@ -27,7 +27,7 @@ class SearchHistory(context: Context){
     fun deleteHistory(databaseTabel: DatabaseTabel){
         dao.deleteHistory(databaseTabel)
     }
-    fun getHistory() : List<DatabaseTabel>{
+    suspend fun getHistory() : List<DatabaseTabel>{
         return dao.getHistory()
     }
 }
