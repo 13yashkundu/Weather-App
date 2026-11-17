@@ -10,6 +10,6 @@ import androidx.room.RoomDatabase
 
 abstract class Database : RoomDatabase(){
 
-    abstract class getAccessObject() : DatabaseDAO
+    abstract fun getAccessObject() : DatabaseDAO
 
 }

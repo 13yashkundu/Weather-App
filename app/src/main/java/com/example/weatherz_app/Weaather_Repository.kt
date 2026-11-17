@@ -1,6 +1,6 @@
 package com.example.weatherz_app
 
-import kotlinx.coroutines.delay
+import android.content.Context
 
 class Weaather_Repository {
     suspend fun fetchWeather(
@@ -10,5 +10,24 @@ class Weaather_Repository {
         val result : WeatherResponse? =
             Url_setup.api.getWeather(key, city)
         return result
+    }
+}
+
+class SearchHistory(context: Context){
+
+    private val database = DatabaseProvider.getDatabase(context)
+    private val dao = database.getAccessObject()
+
+    fun inserHistory(databaseTabel: DatabaseTabel){
+
+        dao.insertHistory(databaseTabel)
+
+    }
+
+    fun deleteHistory(databaseTabel: DatabaseTabel){
+        dao.deleteHistory(databaseTabel)
+    }
+    fun getHistory() : List<DatabaseTabel>{
+        return dao.getHistory()
     }
 }
