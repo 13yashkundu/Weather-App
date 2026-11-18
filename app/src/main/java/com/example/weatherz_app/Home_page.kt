@@ -28,6 +28,9 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 
 class Home_page : Fragment() {
 
+    val historyVM: SearchHistory_ViewModel by viewModels {
+        SearchHistoryViewModelFactory(requireContext())
+    }
     val vm : Weather_ViewModel by viewModels()
     lateinit var viewBinding : FragmentHomePageBinding
 
@@ -48,6 +51,7 @@ class Home_page : Fragment() {
 
         viewBinding.searchButton.setOnClickListener {
             searchCity(viewBinding.searchBar.text.toString().trim())
+
         }
         viewBinding.searchBar.setOnEditorActionListener { _, _, _ ->
             searchCity(viewBinding.searchBar.text.toString().trim())

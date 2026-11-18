@@ -11,14 +11,18 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
- val repository = Weaather_Repository()
+
 
 data class WeatherUIState(
     val isLoading : Boolean = false,
     val result : WeatherResponse? = null,
     val error : String? = null
 )
-class Weather_ViewModel : ViewModel() {
+class Weather_ViewModel(
+    private val historyRepository: SearchHistry_Repository
+) : ViewModel() {
+
+    private val repository = Weaather_Repository()
 
     private val _weatherUIState = MutableStateFlow(WeatherUIState())
     val weatherUIState = _weatherUIState.asStateFlow()
@@ -55,6 +59,9 @@ class Weather_ViewModel : ViewModel() {
                 )
                 err = "Something went wrong, try again later"
                 null
+            }
+            if (response!=null){
+
             }
                 _weatherUIState.update {
                     it.copy(

@@ -14,12 +14,11 @@ data class historyData(
     val temprature: String? = null
 )
 
-class SearchHistory_ViewModel(context: Context) : ViewModel() {
+class SearchHistory_ViewModel( val repository: SearchHistry_Repository) : ViewModel() {
 
     private val _historyList = MutableStateFlow<List<DatabaseTabel>>(emptyList())
     val historyList = _historyList.asStateFlow()
 
-    private val repository = SearchHistry_Repository(context)
 
     fun insertData(dataTabel: DatabaseTabel){
         viewModelScope.launch {
